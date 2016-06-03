@@ -1,0 +1,17 @@
+web:
+  build: ./php
+  ports: 
+    - "80:80"
+  volumes:
+    - /home/sukach/work/forevr/project/BE:/opt/app/current:Z
+  links:
+    - redis
+    - elasticsearch
+redis:
+  image: redis
+elasticsearch:
+  image: elasticsearch
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+
