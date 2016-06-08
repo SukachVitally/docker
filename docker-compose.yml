@@ -1,17 +1,30 @@
-web:
-  build: ./php
-  ports: 
-    - "80:80"
-  volumes:
-    - /home/sukach/work/forevr/project/BE:/opt/app/current:Z
-  links:
-    - redis
-    - elasticsearch
-redis:
-  image: redis
-elasticsearch:
-  image: elasticsearch
-  ports:
-    - "9200:9200"
-    - "9300:9300"
+version: '2'
+services:
+  redis:
+    image: redis
+
+  elasticsearch:
+    image: elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: homestead
+      POSTGRES_DB: forevr
+
+  web:
+    build: ./php
+    ports: 
+      - "80:80"
+    volumes:
+      - /home/sukach/work/forevr/project/BE:/opt/app/current:Z
+    links:
+      - redis
+      - elasticsearch
+    depends_on:
+      - db
 
