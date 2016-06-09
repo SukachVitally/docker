@@ -15,8 +15,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 RUN apt-get install -y nginx
 ADD nginx.conf /etc/nginx/sites-available/default
 VOLUME ["/opt/app/current/"]
-#RUN sed -i -e "s/user = www-data/user = root/" /etc/php/7.0/fpm/pool.d/www.conf
-#RUN sed -i -e "s/group = www-data/group = root/" /etc/php/7.0/fpm/pool.d/www.conf
 EXPOSE 80
 COPY docker-entrypoint.sh /opt/app/docker-entrypoint.sh
 RUN chmod a+x /opt/app/docker-entrypoint.sh
